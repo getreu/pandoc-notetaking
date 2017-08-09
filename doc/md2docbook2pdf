@@ -1,0 +1,40 @@
+#!/bin/bash
+# Author: Jens Getreu
+
+
+
+render () {
+#set -x
+InPath="$1"
+InFile="${InPath##*/}"
+InBase="${InFile%.md}"
+InDir="${InPath%/*}"
+
+OutPath="$2"
+OutFile="${OutPath##*/}"
+OutBase="${OutFile%.pdf}"
+OutDir="${OutPath%/*}"
+
+XmlFile="$OutBase.xml"
+PdfFile="$OutBase.pdf"
+
+mkdir -p "$OutDir"
+
+pandoc -s -t docbook5 -o "$OutDir/$XmlFile" "$InPath"
+
+cp -r  "$InDir/images/" "$OutDir"
+
+
+echo fopub -H  "$OutDir/$XmlFile" 
+#fopub -t ./docbook-xsl  "$OutDir/$XmlFile" && \
+fopub -H  "$OutDir/$XmlFile" && \
+	rm  "$OutDir/$XmlFile" && \
+    rm  -v -r "$OutDir/images/" && \
+	mupdf "$OutDir/$PdfFile" & 
+
+}
+
+
+render "source/Note taking with Pandoc--Use your favorite editor and markup-language.md" \
+       "build/pdf/pandoc-notetaking.pdf" \
+       "build/html/_downloads/"

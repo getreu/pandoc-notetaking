@@ -1,0 +1,22 @@
+#!/bin/bash
+# Author: Jens Getreu
+
+render () {
+#set -x
+Path="$1"
+FileName="${Path##*/}"
+BaseName="${FileName%.md}"
+InDir="${Path%/*}"
+OutDir="../build/html" # relative to $InDirName
+cd "$InDir"
+mkdir -p "$OutDir"
+
+
+pandoc -o "$OutDir/$BaseName.html" "$FileName"
+
+cp -r "./images/" "$OutDir"
+
+}
+
+
+render "source/Note taking with Pandoc--Use your favorite editor and markup-language.md"

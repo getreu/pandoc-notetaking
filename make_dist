@@ -1,0 +1,24 @@
+#!/bin/sh
+# Author: Jens Getreu
+
+
+
+package () {
+
+
+OutDirName="$(dirname "$3")"
+mkdir -p "$OutDirName"
+ZipBaseName=$(basename "$3" ".zip")
+ZipFileName="$OutDirName/$ZipBaseName.zip"
+DownloadDir="./doc/build/html/_downloads/"
+mkdir -p "$DownloadDir"
+
+
+
+zip -r "$ZipFileName" "$1" "$2"
+cd "$DownloadDir"
+ln -sf "../../../../$ZipFileName" .
+}
+
+
+package "bin" "doc" "./doc/build/dist/pandoc-notetaking.zip"
