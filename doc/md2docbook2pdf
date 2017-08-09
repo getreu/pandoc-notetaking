@@ -35,6 +35,6 @@ fopub -H  "$OutDir/$XmlFile" && \
 }
 
 
-render "source/Note taking with Pandoc--Use your favorite editor and markup-language.md" \
+render "source/index.md" \
        "build/pdf/pandoc-notetaking.pdf" \
        "build/html/_downloads/"

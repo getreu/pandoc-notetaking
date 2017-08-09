@@ -22,11 +22,11 @@ Create a new note
 
 Edit notes
 
-*   Launches an editor and a live-previewer (Firefox, Chrome of Chromium).
+*   Launches an editor and a live-previewer (Firefox, Chrome or Chromium).
 
 View notes
 
-*   Launches a live-previewer (Firefox, Chrome of Chromium).
+*   Launches a live-previewer (Firefox, Chrome or Chromium).
 
 Sync filename
 

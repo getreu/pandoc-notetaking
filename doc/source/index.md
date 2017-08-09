@@ -1,0 +1,1 @@
+Note taking with Pandoc--Use your favorite editor and markup-language.md

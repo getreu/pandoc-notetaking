@@ -19,4 +19,4 @@ cp -r "./images/" "$OutDir"
 }
 
 
-render "source/Note taking with Pandoc--Use your favorite editor and markup-language.md"
+render "source/index.md"
