@@ -12,7 +12,7 @@ cd "$InDir"
 mkdir -p "$OutDir"
 
 
-pandoc -o "$OutDir/$BaseName.html" "$FileName"
+pandoc -s --number-sections --toc -o "$OutDir/$BaseName.html" "$FileName"
 
 cp -r "./images/" "$OutDir"
 

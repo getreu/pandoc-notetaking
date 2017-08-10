@@ -484,9 +484,39 @@ For details about how the metadata is simplified into a
 configuration see [Windows] below.
 
 
-## Choose your favorite markup langugae
+## Choose your favorite markup language
 
-The above examples show 
+### Set the default markup language for new notes
+
+The default markup language for new notes is _Markdown_. To change the default
+modify the `DEFAULT_EXT` variable in the `### CONFIGURATION SECTION` of
+`pandoc-note`, e.g. `DEFAULT_EXT="rst"` sets the default for new notes to
+_ReStructuredText_. Valid values are: `md`, `markdown`, `mkd`, `rst`, `rest`,
+`txt`, `t2t`, `textile`, `twiki` and `mediawiki` (cf. Markups variable in
+pandoc-note).
+
+
+### Change the markup language for an existing note
+
+`pandoc-note` determines the markup language by the note's filename extension.
+For example `md` means that the note is formatted in _Markdown_.  Like the
+filename itself, the filename extension is kept in sync with the document's YAML
+metadata header (see Section [Document title - filename sync]).  To change the
+markup language for a given note change the value of the `fileext` variable in
+the header to a filename extension Pandoc recognizes as input file.  Valid
+values are: `md`, `markdown`, `mkd`, `rst`, `rest`, `txt`, `t2t`, `textile`,
+`twiki` and `mediawiki` (cf. `Markups` variable in `pandoc-note`).  For example:
+in order to switch the markup language from _Markdown_ to _ReStructuredText_,
+change `fileext: md` to `fileext: rst`. Be sure to save the note, close the
+editor, close the viewer and reopen the note for changes to take effect. Doing
+so will change the note's filename extension from `md` to `rst`.
+
+> **Warning**
+> 
+> Do not change the filename extension manually, as the change will be
+> reverted next time you open the note with `pandoc-note`. Instead, change
+> the `fileext` variable in the note's header.
+
 
 
 ## Choose your favorite editor and favorite viewer
@@ -747,10 +777,11 @@ Further reading:
 
 ---
 title: 'Note taking with Pandoc'
-subtitle: 'Use your favorite editor and markup-language'
+subtitle: 'Organize your notes with your favorite editor and markup-language'
 author: Jens Getreu
-date: 8.8.2017
-version: v1.0
+date: 9.8.2017
+version: v1.1
 file-ext: md
+lang: en
 ---
 

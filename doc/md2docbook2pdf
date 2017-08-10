@@ -20,7 +20,7 @@ PdfFile="$OutBase.pdf"
 
 mkdir -p "$OutDir"
 
-pandoc -s -t docbook5 -o "$OutDir/$XmlFile" "$InPath"
+pandoc --template "$InDir/template.db" -s -t docbook5 -o "$OutDir/$XmlFile" "$InPath"
 
 cp -r  "$InDir/images/" "$OutDir"
 
