@@ -557,7 +557,7 @@ into _html_.  You can choose among the following:
     https://addons.mozilla.org/en-US/firefox/addon/auto-reload/).
 
     This is my preferred solution because you are free to use
-    and markup language Pandoc supports, e.g. _ReStructuredText_,
+    any markup language Pandoc supports, e.g. _ReStructuredText_,
     _Textile_, _MediaWiki_ and many others.
 
     Currently this solution works only under Linux because it relies on the
@@ -615,7 +615,7 @@ into _html_.  You can choose among the following:
 
 
 #.  Download the note-taking-script `bin/pandoc-note` from Github
-    [getreu/markdown-notetaking](https://github.com/getreu/markdown-notetaking).
+    [getreu/pandoc-notetaking](https://github.com/getreu/pandoc-notetaking).
     Alternatively you can copy and paste the listing at end of this
     document.
 
