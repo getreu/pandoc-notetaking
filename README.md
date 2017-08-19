@@ -12,7 +12,7 @@ _Chromium_, _Chrome_ or _Firefox_[^2].
 
 All you need is the `pandoc-note` script, the [Pandoc](http://pandoc.org) format
 converter, an editor of your choice and Chromium, Chrome or Firefox as live
-previewer.
+previewer. If not available, `pandoc-note` also works without `pandoc`.
 
 
 `pandoc-note` runs under Linux and Windows. The script operates in four modes

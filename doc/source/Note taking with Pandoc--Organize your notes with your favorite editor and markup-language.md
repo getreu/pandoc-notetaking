@@ -2,15 +2,14 @@
      overwrites the example headers part of the body text -->
 
 
-Markup languages like _Markdown_, _ReStructuredText_, _textile_, _txt2tags_ or
-_mediawiki_ are perfectly suited for fast note taking. Type your notes with your
-favorite editor, using your favorite markup language[^1] and view them with
-_Chromium_, _Chrome_ or _Firefox_[^2].
+Markup languages like _Markdown_, _ReStructuredText_, _asciidoc_, _textile_,
+_txt2tags_ or _mediawiki_ are perfectly suited for fast note taking. Type your
+notes with your favorite editor, using your favorite markup language[^1] and
+view them with _Chromium_, _Chrome_ or _Firefox_[^2].
 
-All you need is the `pandoc-note` script, the [Pandoc](http://pandoc.org) format
-converter, an editor of your choice and Chromium, Chrome or Firefox as live
-previewer.
-
+All you need is this `pandoc-note` script, the [Pandoc](http://pandoc.org)
+format converter, an editor of your choice and Chromium, Chrome or Firefox as
+live previewer. If not available, `pandoc-note` also works without `pandoc`.
 
 `pandoc-note` runs under Linux and Windows. The script operates in four modes
 depending on it’s options (see [Invoking pandoc-note]):
@@ -227,7 +226,7 @@ title:    'Lecture 1'
 subtitle: 'Notes'
 author:   getreu
 date:     2017-08-09        
-revision: 1.0
+revision: 1.1
 fileext:  md
 ---
 ```
@@ -332,7 +331,7 @@ Annotations on [file](Implementing the NIST Cybersecurity Framework.pdf)
 
 Before quitting the `pandoc-note` script executes it’s *editing-mode*.
 This opens in your editor the completed template (see example above) and
-a live-previewr showing the rendered asciidoc file:
+a live-previewer showing the rendered text file:
 
 ![example filename](images/example-filename.png){width="70%"}
 
@@ -784,4 +783,3 @@ version: v1.1
 file-ext: md
 lang: en
 ---
-
