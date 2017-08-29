@@ -84,11 +84,10 @@ RenderHtmlWithPandoc () {
     # https://addons.mozilla.org/en-US/firefox/addon/auto-reload/
     InFile="$1"   
     HtmlFile="$1.html"
-    while true ; do
-        pandoc -s -o "$HtmlFile" "$InFile"
-        inotifywait -qq -e modify -e move_self "$InFile"
+    pandoc -s -o "$HtmlFile" "$InFile"
+    while inotifywait -qq -e modify -e move_self "$InFile" ; do
         sleep 0.2s
-        if [ $? -ne 0 ]; then break; fi
+        pandoc -s -o "$HtmlFile" "$InFile"
     done&
 }
 
