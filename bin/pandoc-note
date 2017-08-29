@@ -82,13 +82,29 @@ RenderHtmlWithPandoc () {
     # The following relies on the packages: pandoc and inotify-tools
     # In Firefox install the auto-reload plugin from: 
     # https://addons.mozilla.org/en-US/firefox/addon/auto-reload/
+    Render () {
+       if [ "$InFileExt" = "md" ] ; then 
+           pandoc -s -o "$HtmlFile" "$InFile" 
+       else
+           # If extension is not "md" strip YAML header.
+           # First byte is BOM
+           sed -e '/^.---$/,/^---$/ d' "$InFile" >  "$InFile-tmp.$InFileExt" 
+           pandoc -s -o "$HtmlFile" "$InFile-tmp.$InFileExt"
+           rm "$InFile-tmp.$InFileExt"
+       fi
+    }
+
     InFile="$1"   
+    InFileExt="${InFile##*.}"
     HtmlFile="$1.html"
-    pandoc -s -o "$HtmlFile" "$InFile"
+    Render
+    (
     while inotifywait -qq -e modify -e move_self "$InFile" ; do
         sleep 0.2s
-        pandoc -s -o "$HtmlFile" "$InFile"
-    done&
+        Render 
+    done
+    rm -f "$HtmlFile"
+    ) & 
 }
 
 
@@ -191,7 +207,9 @@ SanitizeFilename () {
 ParseYaml () {
    local prefix=$2
    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
-   sed  -e '/---/,/---/ p' \
+   # line 1: keep only the YAML header lines if they exist
+   # First byte is BOM
+   sed  -e '/^.---$/,/^---$/ !d' \
        -ne "s|^\($s\):|\1|" \
         -e 's|`||g;s|\$||g;' \
         -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
@@ -259,11 +277,11 @@ SyncFilename () {
 		DirName="$(dirname "$Path")"
         local NewPath="${DirName}/${LeadingNumbers}${FileTitle}.$Markup"
 		mv -n "$Path" "$NewPath" >/dev/null 2>&1
-		Path="$NewPath"
 
         # delete html rendition
         rm -f "$Path.html"
-        rm -f "$NewPath.html"
+
+		Path="$NewPath"
 	fi
 
 	# Return global variable
@@ -355,7 +373,7 @@ PandocView () {
 	if [ -n "$MD_VIEWER" ]; then
 		"$MD_VIEWER" "$MD_VIEWER_OPT$PandocView" &
 	else
-		LaunchViewer "$PandocView"
+		LaunchViewer "$PandocView" >&- 2>&-
 	fi
 	# Return global variable PandocView
 }
