@@ -6,59 +6,59 @@
 ### CONFIGURATION SECTION START
 
 LaunchViewer () {
-	# WARNING: if the environment variable MD_VIEWER is defined
-	# the following code is never executed!
-	
-	# Note: we need & at the end of the line!
-	# Uncomment one line only!
+    # WARNING: if the environment variable MD_VIEWER is defined
+    # the following code is never executed!
+
+    # Note: we need & at the end of the line!
+    # Uncomment one line only!
 
     # Alternative 1: Render with Pandoc and view with Firefox
     # Render with Pandoc and view with Firefox
     # Install the packages: pandoc and inotify-tools
-    # In Firefox install the auto-reload plugin from: 
+    # In Firefox install the auto-reload plugin from:
     # https://addons.mozilla.org/en-US/firefox/addon/auto-reload/
     RenderHtmlWithPandoc "$1"
     firefox  "file:///$1.html" &> /dev/null &
 
-    # Alternative 2: Render and view with Firefox 
+    # Alternative 2: Render and view with Firefox
     # This solution renders markdown in the following plugin
     # https://addons.mozilla.org/en-US/firefox/addon/markdown-viewer-webext/
     #firefox  "file:///$1" &> /dev/null &
 
     # Alternative 3: Render and view with Chromium
-	# Chromium markdowntor-plugin follows your changes without "reload".
-	# Extra package needed for this example: apt-get install uni2ascii
+    # Chromium markdowntor-plugin follows your changes without "reload".
+    # Extra package needed for this example: apt-get install uni2ascii
     # You also need a markdown viewer plugin.
-	#chromium "--app=file:$(echo "$HtmlFile"|uni2ascii -aJ)" &
+    #chromium "--app=file:$(echo "$HtmlFile"|uni2ascii -aJ)" &
 
- 
+
     # Alternative 4: no viewer (viewer is part of editor)
-	# If your editor has an integrated viewer (like Atom)
-	# uncomment every line above, but we need this:
-	return 0
+    # If your editor has an integrated viewer (like Atom)
+    # uncomment every line above, but we need this:
+    return 0
 }
 
 LaunchEditor () {
-	# WARNING: if the environment variable MD_EDITOR is defined
-	# the following code is never executed!
+    # WARNING: if the environment variable MD_EDITOR is defined
+    # the following code is never executed!
 
-	# Note there is no & in this function. The editor should not fork!
-	# Uncomment one line only!
+    # Note there is no & in this function. The editor should not fork!
+    # Uncomment one line only!
 
 
-	# Very simple Linux editor.
-	#leafpad "$1"
-	
-	# Linux geany. Optional: enable autosave in geany's save plugin.
-	#geany "$1"
-	
-	# Alternatively run gvim.
-	gvim --nofork "$1"
-	return 0
+    # Very simple Linux editor.
+    #leafpad "$1"
+
+    # Linux geany. Optional: enable autosave in geany's save plugin.
+    #geany "$1"
+
+    # Alternatively run gvim.
+    gvim --nofork "$1"
+    return 0
 }
 
 # Markup language for new notes is markdown (md)
-# Change to "rst" for ReStructuredText or any other markup type 
+# Change to "rst" for ReStructuredText or any other markup type
 # understood by pandoc (see MARKUPS below).
 DEFAULT_EXT="md"
 
@@ -70,135 +70,135 @@ DEFAULT_EXT="md"
 MARKUPS="md\nmarkdown\nmkd\nrst\nrest\ntxt\nt2t\ntextile\ntwiki\nmediawiki\nadoc\nasciidoc"
 
 Readlink () {
-	# Path=$(readlink -f "$1") # not available in busybox
-	# We actually only need absolute paths so the following will do.
-	local Path
-	Path="$(echo "$(cd "$(dirname "$1")" && pwd -P)"/"$(basename "$1")")"
-	# return global variable
-	Readlink="$Path"
+    # Path=$(readlink -f "$1") # not available in busybox
+    # We actually only need absolute paths so the following will do.
+    local Path
+    Path="$(echo "$(cd "$(dirname "$1")" && pwd -P)"/"$(basename "$1")")"
+    # return global variable
+    Readlink="$Path"
 }
 
 RenderHtmlWithPandoc () {
     # The following relies on the packages: pandoc and inotify-tools
-    # In Firefox install the auto-reload plugin from: 
+    # In Firefox install the auto-reload plugin from:
     # https://addons.mozilla.org/en-US/firefox/addon/auto-reload/
     Render () {
-       if [ "$InFileExt" = "md" ] ; then 
-           pandoc -s -o "$HtmlFile" "$InFile" 
+       if [ "$InFileExt" = "md" ] ; then
+           pandoc -s -o "$HtmlFile" "$InFile"
        else
            # If extension is not "md" strip YAML header.
            # First byte is BOM
-           sed -e '/^.---$/,/^---$/ d' "$InFile" >  "$InFile-tmp.$InFileExt" 
+           sed -e '/^.---$/,/^---$/ d' "$InFile" >  "$InFile-tmp.$InFileExt"
            pandoc -s -o "$HtmlFile" "$InFile-tmp.$InFileExt"
            rm "$InFile-tmp.$InFileExt"
        fi
     }
 
-    InFile="$1"   
+    InFile="$1"
     InFileExt="${InFile##*.}"
     HtmlFile="$1.html"
     Render
     (
     while inotifywait -qq -e modify -e move_self "$InFile" ; do
         sleep 0.2s
-        Render 
+        Render
     done
     rm -f "$HtmlFile"
-    ) & 
+    ) &
 }
 
 
 
 Main () {
-	if  [ "-h" = "$1" ]; then
-		echo "\n${0} creates, edits or views a note with markups."
-		echo "\nusage:"
-		echo "\n   $_ [-h][-ro|-so|-eo] | [<Textfile>.<Ext>|<File>|<Dir>]"
-		echo "\n<Dir>|<File>: directory where the new note file will be created"
-		echo "(current directory if none)."
-		echo "If a binary <File> is given a new note file will be created next"
-		echo "to <FILE>."
+    if  [ "-h" = "$1" ]; then
+        echo "\n${0} creates, edits or views a note with markups."
+        echo "\nusage:"
+        echo "\n   $_ [-h][-ro|-so|-eo] | [<Textfile>.<Ext>|<File>|<Dir>]"
+        echo "\n<Dir>|<File>: directory where the new note file will be created"
+        echo "(current directory if none)."
+        echo "If a binary <File> is given a new note file will be created next"
+        echo "to <FILE>."
         echo "A given <Textfile> is opened and edited. <Ext> determines"
         echo "the markup-language such as Markdown, ReStructuredText, MediaWiki"
         echo "and others."
-		echo "Filename of <File> is changed when not in sync with the file's"
+        echo "Filename of <File> is changed when not in sync with the file's"
         echo "metadata YAML block."
-		echo "\nOptions:"
-		echo "-ro\tDo not open editor, open viewer only."
-		echo "-eo\tDo not open viewer, only new note or, sync filename and edit."
-		echo "-so\tDo not open editor or viewer, only new note or sync filename."
-		exit 0
-	fi
+        echo "\nOptions:"
+        echo "-ro\tDo not open editor, open viewer only."
+        echo "-eo\tDo not open viewer, only new note or, sync filename and edit."
+        echo "-so\tDo not open editor or viewer, only new note or sync filename."
+        exit 0
+    fi
 
-	local Path
-	local Option
-	if  [ "-ro" = "$1" ] || [ "-so" = "$1" ] || [ "-eo" = "$1" ] ; then
-		Option="$1"
-		Readlink "$2"
-	else
-		Option=""
-		Readlink "$1"
-	fi
-	Path="$Readlink"
+    local Path
+    local Option
+    if  [ "-ro" = "$1" ] || [ "-so" = "$1" ] || [ "-eo" = "$1" ] ; then
+        Option="$1"
+        Readlink "$2"
+    else
+        Option=""
+        Readlink "$1"
+    fi
+    Path="$Readlink"
 
 
-	# If file extension is not a markup file then create a new note.
+    # If file extension is not a markup file then create a new note.
     local ExtFound=$(echo "$MARKUPS" | grep  "${Path##*.}"; )
 
-	if [ ! -n "$Path" ] || \
-	 [ "$ExtFound" = "" ]  ; then
-		PandocNewNote "$Path"  || exit 1
-		Path="$PandocNewNote"
-	fi
+    if [ ! -n "$Path" ] || \
+     [ "$ExtFound" = "" ]  ; then
+        PandocNewNote "$Path"  || exit 1
+        Path="$PandocNewNote"
+    fi
 
-	if [ -f "$Path" ] ; then
-		if  [ ! "-ro" = "$Option" ] ; then
-			SyncFilename "$Path"
-			Path="$SyncFilename"
-		fi
-		if  [ ! "-eo" = "$Option" ] && \
-			[ ! "-so" = "$Option" ] ; then
-			PandocView "$Path"
-		fi
-		if  [ ! "-ro" = "$Option" ] && \
-			[ ! "-so" = "$Option" ] ; then
-			PandocEdit "$Path"
-			SyncFilename "$PandocEdit"
-			Path="$SyncFilename"
-		fi
-		echo "$Path"
-		exit 0
-	else
-		echo "Error: Can not open '$Path'." >&2
-		exit 1
-	fi
+    if [ -f "$Path" ] ; then
+        if  [ ! "-ro" = "$Option" ] ; then
+            SyncFilename "$Path"
+            Path="$SyncFilename"
+        fi
+        if  [ ! "-eo" = "$Option" ] && \
+            [ ! "-so" = "$Option" ] ; then
+            PandocView "$Path"
+        fi
+        if  [ ! "-ro" = "$Option" ] && \
+            [ ! "-so" = "$Option" ] ; then
+            PandocEdit "$Path"
+            SyncFilename "$PandocEdit"
+            Path="$SyncFilename"
+        fi
+        echo "$Path"
+        exit 0
+    else
+        echo "Error: Can not open '$Path'." >&2
+        exit 1
+    fi
 }
 
 
 
 SanitizeFilename () {
-	# line 1:   tab -> space
-	# line 2:   Delete control characters.
-	# line 3:   :\\/|?~,;=   ->  _
-	# line 4:
-	#   Exclude NTFS critical characters:       <>:"\\/|?*
-	#   https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247%28v=vs.85%29.aspx
-	#   Exclude restricted in fat32:        +,;=[]
-	#   https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
-	#   These are considered unsafe in URLs:    <>#%{}|\^~[]`
-	#   https://perishablepress.com/stop-using-unsafe-characters-in-urls/
-	# line 5:   Strip all until the first alpha char at the beginning
-	#       and all spaces and _ at the end of the line.
-	# line 6:   Remove spaces and _ before and after --.
-	# Return global variable
-	SanitizeFilename="$(echo "$1"| \
-		tr -s '[:blank:]'   ' '| \
-		tr -d '[:cntrl:]' | \
-		tr -s ':\\/|?~,;='   '_'| \
-		tr -s '<>:"\\/|?*<>#%{}|\^~[]+,;=[]`[:blank:]'    ' '| \
-		sed -e 's/[[:blank:]_]*\(.*\)/\1/g; s/[[:blank:]_]*$//g' \
-			-e 's/[[:blank:]_]*--[[:blank:]_]*/--/g'
-		)"
+    # line 1:   tab -> space
+    # line 2:   Delete control characters.
+    # line 3:   :\\/|?~,;=   ->  _
+    # line 4:
+    #   Exclude NTFS critical characters:       <>:"\\/|?*
+    #   https://msdn.microsoft.com/en-us/library/windows/desktop/aa365247%28v=vs.85%29.aspx
+    #   Exclude restricted in fat32:        +,;=[]
+    #   https://en.wikipedia.org/wiki/Filename#Reserved_characters_and_words
+    #   These are considered unsafe in URLs:    <>#%{}|\^~[]`
+    #   https://perishablepress.com/stop-using-unsafe-characters-in-urls/
+    # line 5:   Strip all until the first alpha char at the beginning
+    #       and all spaces and _ at the end of the line.
+    # line 6:   Remove spaces and _ before and after --.
+    # Return global variable
+    SanitizeFilename="$(echo "$1"| \
+        tr -s '[:blank:]'   ' '| \
+        tr -d '[:cntrl:]' | \
+        tr -s ':\\/|?~,;='   '_'| \
+        tr -s '<>:"\\/|?*<>#%{}|\^~[]+,;=[]`[:blank:]'    ' '| \
+        sed -e 's/[[:blank:]_]*\(.*\)/\1/g; s/[[:blank:]_]*$//g' \
+            -e 's/[[:blank:]_]*--[[:blank:]_]*/--/g'
+        )"
 }
 
 
@@ -229,13 +229,13 @@ ParseYaml () {
 
 
 SyncFilename () {
-	# Pathname of the markdown-file
-	local Path
-	Path="$1"
+    # Pathname of the markdown-file
+    local Path
+    Path="$1"
 
-	# Change filename according to the title in the
-	# header of the .md file.
-	
+    # Change filename according to the title in the
+    # header of the .md file.
+
     eval $(ParseYaml "$Path")
 
     local Markup="$DEFAULT_EXT"
@@ -244,97 +244,97 @@ SyncFilename () {
     fi
 
     local Title="$title"
-	if [ "$subtitle" != "" ] ; then
+    if [ "$subtitle" != "" ] ; then
         Title="$Title--$subtitle"
     fi
-    
-	# A title was found when Title <> ""
-	if [ "$Title" != "" ] ; then
 
-		# extract leading numbers including "-" and "_"
-		# example  "20150912-hallo.md" -> "20150912-"
-		# example  "01-abstract.md" -> "01-"
-		# example  "04-01_03-abstract.md" -> "04-01_03-"
-		# example  "hallo02-abstract.md" -> ""
-		local BaseName
-		BaseName="$(basename "$Path")"
-		local LeadingNumbers
-		LeadingNumbers="$(echo "$BaseName" | \
-			sed -e 's/\([[:digit:]_-]*\)\(.*\)/\1/')"
-		# if no leading numbers found the following equals
-		if [ "$BaseName" = "$LeadingNumbers" ] ; then
-			LeadingNumbers="" #no leading no. found
-		fi
+    # A title was found when Title <> ""
+    if [ "$Title" != "" ] ; then
 
-		# Substitute special chars with _
-		SanitizeFilename "$Title"
-		local FileTitle
-		FileTitle="$(echo "$SanitizeFilename"| \
+        # extract leading numbers including "-" and "_"
+        # example  "20150912-hallo.md" -> "20150912-"
+        # example  "01-abstract.md" -> "01-"
+        # example  "04-01_03-abstract.md" -> "04-01_03-"
+        # example  "hallo02-abstract.md" -> ""
+        local BaseName
+        BaseName="$(basename "$Path")"
+        local LeadingNumbers
+        LeadingNumbers="$(echo "$BaseName" | \
+            sed -e 's/\([[:digit:]_-]*\)\(.*\)/\1/')"
+        # if no leading numbers found the following equals
+        if [ "$BaseName" = "$LeadingNumbers" ] ; then
+            LeadingNumbers="" #no leading no. found
+        fi
+
+        # Substitute special chars with _
+        SanitizeFilename "$Title"
+        local FileTitle
+        FileTitle="$(echo "$SanitizeFilename"| \
             sed -e 's/\([[:digit:]_-]*\)\(.*\)/\2/')"
 
-		# Construct new name
-		local DirName
-		DirName="$(dirname "$Path")"
+        # Construct new name
+        local DirName
+        DirName="$(dirname "$Path")"
         local NewPath="${DirName}/${LeadingNumbers}${FileTitle}.$Markup"
-		mv -n "$Path" "$NewPath" >/dev/null 2>&1
+        mv -n "$Path" "$NewPath" >/dev/null 2>&1
 
         # delete html rendition
         rm -f "$Path.html"
 
-		Path="$NewPath"
-	fi
+        Path="$NewPath"
+    fi
 
-	# Return global variable
-	SyncFilename="$Path"
+    # Return global variable
+    SyncFilename="$Path"
 }
 
 
 
 
 PandocNewNote () {
-	local Subtitle="Notes"
-	local TitleSubtitle=": $Subtitle"
-	local FileSubtitle="--$Subtitle"
-	local Dir
-	local Basename
-	local DocRef
-	local NewFileName
-	if [ -n "$1" ] && [ -f "$1" ] ; then
-		Dir="$(dirname "$1")"
-		Basename="$(basename "$1")"
+    local Subtitle="Notes"
+    local TitleSubtitle=": $Subtitle"
+    local FileSubtitle="--$Subtitle"
+    local Dir
+    local Basename
+    local DocRef
+    local NewFileName
+    if [ -n "$1" ] && [ -f "$1" ] ; then
+        Dir="$(dirname "$1")"
+        Basename="$(basename "$1")"
         DocRef="Annotations on [file]($Basename)"
-		SanitizeFilename "$Basename"
-		NewFileName="$Dir/${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
-	elif [ -n "$1" ] && [ -d "$1" ] ; then
-		Dir="$1"
-		Basename="$(basename "$1")"
-		DocRef=""
-		# omit leading numbers, "-" and "_"
-		Basename="$(echo "$Basename"| \
-			sed -e 's/\([[:digit:]_-]*\)\(.*\)/\2/')"
-		SanitizeFilename "$Basename"
-		NewFileName="$Dir/$(date +%Y%m%d)-${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
-	else
-		Dir="$(pwd)"
-		Basename="$(basename "$Dir")"
-		DocRef=""
-		# omit leading numbers, "-" and "_"
-		Basename="$(echo "$Basename"| \
-			sed -e 's/\([[:digit:]_-]*\)\(.*\)/\2/')"
-		SanitizeFilename "$Basename"
-		NewFileName="$Dir/$(date +%Y%m%d)-${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
-	fi
-	local Datestr
-	Datestr="$(date +%Y-%m-%d)"
+        SanitizeFilename "$Basename"
+        NewFileName="$Dir/${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
+    elif [ -n "$1" ] && [ -d "$1" ] ; then
+        Dir="$1"
+        Basename="$(basename "$1")"
+        DocRef=""
+        # omit leading numbers, "-" and "_"
+        Basename="$(echo "$Basename"| \
+            sed -e 's/\([[:digit:]_-]*\)\(.*\)/\2/')"
+        SanitizeFilename "$Basename"
+        NewFileName="$Dir/$(date +%Y%m%d)-${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
+    else
+        Dir="$(pwd)"
+        Basename="$(basename "$Dir")"
+        DocRef=""
+        # omit leading numbers, "-" and "_"
+        Basename="$(echo "$Basename"| \
+            sed -e 's/\([[:digit:]_-]*\)\(.*\)/\2/')"
+        SanitizeFilename "$Basename"
+        NewFileName="$Dir/$(date +%Y%m%d)-${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
+    fi
+    local Datestr
+    Datestr="$(date +%Y-%m-%d)"
 
-	if  [ ! -e "$NewFileName" ] ; then
+    if  [ ! -e "$NewFileName" ] ; then
 
-		# Create new file according to template (with unicode BOM)
-		printf  "\357\273\277---
+        # Create new file according to template (with unicode BOM)
+        printf  "\357\273\277---
 title:    '${Basename}'
 subtitle: '${Subtitle}'
 author:   $USER
-date:     $Datestr        
+date:     $Datestr
 revision: 1.0
 fileext:  $DEFAULT_EXT
 ---
@@ -345,37 +345,39 @@ $DocRef
 
 " > "$NewFileName"
 
-	else
-		echo "$NewFileName already exists. No new document created.">&2
-	fi
-	# return global variable
-	PandocNewNote="$NewFileName"
+    else
+        echo "$NewFileName already exists. No new document created.">&2
+    fi
+    # return global variable
+    PandocNewNote="$NewFileName"
 }
 
 
 
 
 PandocEdit () {
-	PandocEdit="$1"
-	if [ -n "$MD_EDITOR" ]; then
-		"$MD_EDITOR" "$PandocEdit"
-	else
-		LaunchEditor "$PandocEdit"
-	fi
-	# Return global variable PandocEdit
+    PandocEdit="$1"
+    if [ -n "$MD_EDITOR" ]; then
+        "$MD_EDITOR" "$PandocEdit"
+    else
+        LaunchEditor "$PandocEdit"
+    fi
+    # delete rendition if exists
+    rm -f "$PandocEdit.html"
+    # Return global variable PandocEdit
 }
 
 
 
 
 PandocView () {
-	PandocView="$1"
-	if [ -n "$MD_VIEWER" ]; then
-		"$MD_VIEWER" "$MD_VIEWER_OPT$PandocView" &
-	else
-		LaunchViewer "$PandocView" >&- 2>&-
-	fi
-	# Return global variable PandocView
+    PandocView="$1"
+    if [ -n "$MD_VIEWER" ]; then
+        "$MD_VIEWER" "$MD_VIEWER_OPT$PandocView" &
+    else
+        LaunchViewer "$PandocView" >&- 2>&-
+    fi
+    # Return global variable PandocView
 }
 
 
