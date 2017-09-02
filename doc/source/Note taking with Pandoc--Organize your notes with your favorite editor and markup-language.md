@@ -46,6 +46,11 @@ The project’s webpage is on
 There you also find a [pdf rendition](http://blog.getreu.net/_downloads/pandoc-notetaking.pdf)
 of this document.
 
+Read more about the 2 most common **use cases** in Section [How
+students take notes].
+
+
+
 [^1]: `pandoc-note` supports all `Pandoc`'s plain text input formats (see:
   `pandoc --list-input-formats`).  `pandoc-note` guesses the markup language
 from the file extension of the text file. Currently `md`, `markdown`, `mkd`,
@@ -54,13 +59,6 @@ from the file extension of the text file. Currently `md`, `markdown`, `mkd`,
 [^2]: As alternative editors with build-in previewer are supported.
 
 
-**Getting started**
-
-1.  Read the installation guide for [Linux](#linux) or
-    [Windows](#windows).
-
-2.  Read about the 2 most common use cases
-    [How students take notes]
 
 # How students take notes
 
@@ -97,9 +95,9 @@ editor](images/workflow1-6.png){width="60%"}
 
 > **Note**
 >
-> Before and after launching the editor `pandoc-note` renames the file to
-> be in sync with the asciidoc title. For more details see
-> [Document title - filename sync]
+> Before and after launching the editor `pandoc-note` renames the file to be in
+> sync with the document's metadata, i.e. title, subtitle and file-extension.
+> For more details see [Document title - filename sync]
 
 ## Taking notes about a file
 
@@ -114,6 +112,65 @@ pdf](images/workflow2-3.png){width="100%"}
 
 ![The new note file on disk after closing the
 editor](images/workflow2-4.png){width="60%"}
+
+
+# Quickstart
+
+`pandoc-note` can be easily configured for your personal preferences and
+needs[^set-up].
+This section explains a basic standard setup to get you started quickly.
+The default setup runs under Linux and uses `leafpad` as editor and
+`firefox` as viewer.
+
+
+[^set-up]: For a personalized setup read the installation guide for
+           [Linux](#linux) or [Windows](#windows).
+
+## Install dependencies
+
+#. Install the following packages:
+
+          apt-get install pandoc inotify-tools leafpad firefox
+
+
+#. Install the [auto-reload](https://addons.mozilla.org/en-US/firefox/addon/auto-reload/)
+   plugin in Firefox.
+
+
+#. Get and install the `pandoc-note`-binary:
+
+          cd /usr/local/bin
+          sudo wget https://raw.githubusercontent.com/getreu/pandoc-notetaking/master/bin/pandoc-note
+          sudo chown a+x pandoc-note
+
+
+## Run `pandoc-note`
+
+On a shell type:
+
+        pandoc-note
+
+or:
+
+        pandoc-note <file-to-annotate>
+
+
+## Optional personalization
+
+* Your preferred markup language is not *markdown*, but *reStructuredText*,
+  *t2t*, *textile*, *twiki*, *mediawiki* or *asciidoc*? Change it!
+
+* Your preferred editor is not *leafpad*? Change it!
+
+* Your preferred viewer is not *firefox*? Change it!
+
+Read Section [Linux](#linux) or Section [Windows](#windows) for a personalized
+setup.
+
+* You prefer working in a desktop environment instead of working on a shell?
+
+Read [Linux file manager configuration].
+
 
 # Create a new note
 
@@ -484,10 +541,14 @@ For details about how the metadata is simplified into a
 
 
 
-# Installation and configuration
+# Personalized installation and configuration
 
 `pandoc-note` runs on Linux and Windows. For Windows installation and
 configuration see [Windows] below.
+
+This Section tries to cover many setup variants and maybe confusing to
+beginners.  If you just want to get started quickly go to the [Quickstart]
+section for a standard setup.
 
 
 ## Choose your favorite markup language
@@ -644,7 +705,7 @@ into _html_.  You can choose among the following:
     `firefox`, `chrome` or `chromium` and you can specify the parameters
     these programs require. Make sure that your editor does not fork
     when launched. If it does fork, the script will still work but when
-    you quit, no asciidoc-title-filename sync will occur. Outside the
+    you quit, no title-filename synchronization will occur. Outside the
     `CONFIGURATION SECTION` no changes should be necessary.
 
     > **Warning**
@@ -705,7 +766,7 @@ into _html_.  You can choose among the following:
     parameters these programs require. Do the same for the editor of
     your choice. Make sure that your editor does not fork when launched.
     If it does fork, the script will still work but when you quit, no
-    asciidoc-title-filename sync will occur. Outside the
+    title-filename synchronization will occur. Outside the
     `CONFIGURATION SECTION` no changes should be necessary.
 
     See the Section [Editor] and the Section [Live previewer] for details.
