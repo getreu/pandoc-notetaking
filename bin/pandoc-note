@@ -47,13 +47,13 @@ LaunchEditor () {
 
 
     # Very simple Linux editor.
-    #leafpad "$1"
+    leafpad "$1"
 
     # Linux geany. Optional: enable autosave in geany's save plugin.
     #geany "$1"
 
     # Alternatively run gvim.
-    gvim --nofork "$1"
+    #gvim --nofork "$1"
     return 0
 }
 
