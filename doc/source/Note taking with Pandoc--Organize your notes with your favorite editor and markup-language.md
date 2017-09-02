@@ -47,14 +47,14 @@ There you also find a [pdf rendition](http://blog.getreu.net/_downloads/pandoc-n
 of this document.
 
 [^1]: `pandoc-note` supports all `Pandoc`'s plain text input formats (see:
-      `pandoc --list-input-formats`).  `pandoc-note` guesses the markup language
-      from the file extension of the text file. Currently `md`, `markdown`, `mkd`,
-      `rst`, `rest`, `txt`, `t2t`, `textile`, `twiki` and `mediawiki` are supported. 
+  `pandoc --list-input-formats`).  `pandoc-note` guesses the markup language
+from the file extension of the text file. Currently `md`, `markdown`, `mkd`,
+`rst`, `rest`, `txt`, `t2t`, `textile`, `twiki` and `mediawiki` are supported.
 
 [^2]: As alternative editors with build-in previewer are supported.
 
 
-**Getting started**  
+**Getting started**
 
 1.  Read the installation guide for [Linux](#linux) or
     [Windows](#windows).
@@ -206,12 +206,12 @@ creates the following document:
 
     <path>/<dir>/YYYYMMDD-<dir>--Notes.md
 
-``` {.markdown}
+``` {.yaml}
 ---
 title:    '<dir>'
 subtitle: ''
 author:   <login name>
-date:     <current date>        
+date:     <current date>
 revision: 1.0
 fileext:  md
 ---
@@ -227,12 +227,12 @@ creates the following document:
 
     doc/Lecture 1/20170809-Lecture 1--Notes.md
 
-``` {.markdown}
+``` {.yaml}
 ---
 title:    'Lecture 1'
 subtitle: 'Notes'
 author:   getreu
-date:     2017-08-09        
+date:     2017-08-09
 revision: 1.1
 fileext:  md
 ---
@@ -263,12 +263,12 @@ creates the following document:
 
     doc/Lecture 1/20170809-Lecture 1--Notes.md
 
-``` {.markdown}
+``` {.yaml}
 ---
 title:    'Lecture 1'
 subtitle: 'Notes'
 author:   getreu
-date:     2017-08-09        
+date:     2017-08-09
 revision: 1.0
 fileext:  md
 ---
@@ -298,12 +298,12 @@ The new file will be created here:
 And it will look like this:
 
 
-``` {.markdown}
+``` {.yaml}
 ---
 title:    '<filename>.<ext>'
 subtitle: 'Notes'
 author:   <login name>
-date:     <current date>        
+date:     <current date>
 revision: 1.0
 fileext:  md
 ---
@@ -323,12 +323,12 @@ creates the following document
 
 with the content:
 
-``` {.markdown}
+``` {.yaml}
 ---
 title:    'Implementing the NIST Cybersecurity Framework.pdf'
 subtitle: 'Notes'
 author:   getreu
-date:     2017-08-09        
+date:     2017-08-09
 revision: 1.0
 fileext:  md
 ---
@@ -359,7 +359,7 @@ pop up showing the live rendition of your markdown file.
 You may want to use some autosave editor feature in order to observe
 changes immediately in the rendered preview live.
 
-Before opening the editor and after closing it, `pandoc-note` calls 
+Before opening the editor and after closing it, `pandoc-note` calls
 the internal function `SyncFilename`. It guarantees that any change in
 the YAML header of the file you have been editing will replicate in
 the filename of that markdown file. This guarantees that **the filenames
@@ -384,7 +384,7 @@ create this note [^3]:
   pandoc-note 'Implementing the NIST Cybersecurity Framework.pdf'
 ```
 
-[^3]: This only works if you have not changed the original title of the 
+[^3]: This only works if you have not changed the original title of the
       note file in the meantime!
 
 
@@ -399,7 +399,7 @@ create this note [^3]:
 
 launches your preferred viewer: `firefox` or `chromium`[^4].
 
-[^4]: `pandoc-note` can be also configured not to use a viewer when your 
+[^4]: `pandoc-note` can be also configured not to use a viewer when your
       editor has a build in _markdown_-viewer. In this case `-ro` is ignored.
 
 
@@ -518,7 +518,7 @@ editor, close the viewer and reopen the note for changes to take effect. Doing
 so will change the note's filename extension from `md` to `rst`.
 
 > **Warning**
-> 
+>
 > Do not change the filename extension manually, as the change will be
 > reverted next time you open the note with `pandoc-note`. Instead, change
 > the `fileext` variable in the note's header.
@@ -531,16 +531,16 @@ so will change the note's filename extension from `md` to `rst`.
 
 The editor must be an Unicode text editor. Under Linux every editor will do.
 Make sure that your editor does not "fork", meaning that it must block the
-invoking shell as long as your are editing. This is the only way for 
+invoking shell as long as your are editing. This is the only way for
 `pandoc-note` to know when you finished editing. Most editors work this way,
 some like `vim` can be invoked with `vim --no-fork` to achieve this behaviour.
 
-Do not use `Notepad` under Windows as it does not support Unicode. Use 
+Do not use `Notepad` under Windows as it does not support Unicode. Use
 `Wordpad` instead.
 
 **Configuration Linux**
 
-:   Edit in the `pandoc-note` the `LaunchEditor()` function. 
+:   Edit in the `pandoc-note` the `LaunchEditor()` function.
     Uncomment one choice only.
 
 **Configuration Windows**
@@ -557,8 +557,8 @@ into _html_.  You can choose among the following:
 
     For this work you need to install the following:
 
-        sudo apt-get install pandoc inotify-tools  
-                           
+        sudo apt-get install pandoc inotify-tools
+
     In Firefox install the _auto-reload_ plugin from [here](
     https://addons.mozilla.org/en-US/firefox/addon/auto-reload/).
 
@@ -579,9 +579,9 @@ into _html_.  You can choose among the following:
     Optionally you can install viewer plugins for other markup languages
     you want to use, such as [Asciidoctor.js Live Preview](
     https://addons.mozilla.org/en-US/firefox/addon/asciidoctorjs-live-preview/).
-    
 
-    [blog]: https://superuser.com/questions/696361/how-to-get-the-markdown-viewer-addon-of-firefox-to-work-on-linux    
+
+    [blog]: https://superuser.com/questions/696361/how-to-get-the-markdown-viewer-addon-of-firefox-to-work-on-linux
 
 
 
@@ -601,14 +601,14 @@ into _html_.  You can choose among the following:
      https://github.com/retext-project/retext). For the
      [Atom-editor](https://atom.io/) plug-ins for _Markdown_, _Asciidoc_, and
      _ReStructuredText_ are available.
-     
+
 [^6]: At the time of this writing only `chromium` and `chrome` refresh
       automatically and can be launched in application interface mode.
 
 
 **Configuration Linux**
 
-:   Edit in the `pandoc-note` the `LaunchViewer()` function. 
+:   Edit in the `pandoc-note` the `LaunchViewer()` function.
     Uncomment one choice only.
 
 **Configuration Windows**
@@ -654,7 +654,7 @@ into _html_.  You can choose among the following:
     > `CONFIGURATION SECTION` and will override them.
 
     See the Section [Editor] and the Section [Live previewer] for details.
-    
+
 
 #.  Test the installation: open a console window and type `pandoc-note`.
     An *editor* and *viewer* window containing a note template should
@@ -668,14 +668,14 @@ into _html_.  You can choose among the following:
 
 
 #.  Install an [Editor] and a [Live previewer] of your choice (see above).
-    
+
 
 #.  Download the the files `bin/pandoc-note`, `bin/pandoc-note.bat` and
     `bin/busybox.exe` from Github
     [getreu/markdown-notetaking](https://github.com/getreu/markdown-notetaking).
     Alternatively you can copy and paste the listings at end of this
     document. The version of `busybox` in the above repository is
-    outdated. Download the _BusyBox_ executable 
+    outdated. Download the _BusyBox_ executable
     [busybox.exe](http://frippery.org/files/busybox/busybox.exe).
 
 #.  Copy the 3 files in a directory of your choice. In the following I
@@ -709,7 +709,7 @@ into _html_.  You can choose among the following:
     `CONFIGURATION SECTION` no changes should be necessary.
 
     See the Section [Editor] and the Section [Live previewer] for details.
- 
+
 
 6.  Create a shortcut to `pandoc-note.bat` on your desktop, click on
     properties and change the shortcut to *run minimized*. Let the
@@ -772,12 +772,4 @@ Further reading:
 
 -   [How to Add Any Application Shortcut to Windows Explorer’s Context
     Menu](http://www.howtogeek.com/107965/how-to-add-any-application-shortcut-to-windows-explorers-context-menu/).
-
-
-
-
-
-
-
-
 
