@@ -1,5 +1,12 @@
-<!-- The YAML header of this document is at the end of the document that it
-     overwrites the example headers part of the body text -->
+---
+title: 'Note taking with Pandoc'
+subtitle: 'Organize your notes with your favorite editor and markup-language'
+author: Jens Getreu
+date: 9.8.2017
+version: v1.1
+file-ext: md
+lang: en
+---
 
 
 Markup languages like _Markdown_, _ReStructuredText_, _asciidoc_, _textile_,
@@ -774,12 +781,3 @@ Further reading:
 
 
 
----
-title: 'Note taking with Pandoc'
-subtitle: 'Organize your notes with your favorite editor and markup-language'
-author: Jens Getreu
-date: 9.8.2017
-version: v1.1
-file-ext: md
-lang: en
----
