@@ -88,7 +88,7 @@ RenderHtmlWithPandoc () {
        else
            # If extension is not "md" strip YAML header.
            # First byte is BOM
-           sed -e '/^.---$/,/^---$/ d' "$InFile" >  "$InFile-tmp.$InFileExt"
+           sed -e '/^\xef\xbb\xbf---$/,/^---$/ d' "$InFile" >  "$InFile-tmp.$InFileExt"
            pandoc -s -o "$HtmlFile" "$InFile-tmp.$InFileExt"
            rm "$InFile-tmp.$InFileExt"
        fi
@@ -209,7 +209,7 @@ ParseYaml () {
    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
    # line 1: keep only the YAML header lines if they exist
    # First byte is BOM
-   sed  -e '/^.---$/,/^---$/ !d' \
+   sed  -e '/^\xef\xbb\xbf---$/,/^---$/ !d' \
        -ne "s|^\($s\):|\1|" \
         -e 's|`||g;s|\$||g;' \
         -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
@@ -238,9 +238,9 @@ SyncFilename () {
 
     eval $(ParseYaml "$Path")
 
-    local Markup="$DEFAULT_EXT"
+    local Fileext="$DEFAULT_EXT"
     if [ "$fileext" != "" ] ; then
-        Markup="$fileext"
+        Fileext="$fileext"
     fi
 
     local Title="$title"
@@ -275,13 +275,16 @@ SyncFilename () {
         # Construct new name
         local DirName
         DirName="$(dirname "$Path")"
-        local NewPath="${DirName}/${LeadingNumbers}${FileTitle}.$Markup"
+        local NewPath="${DirName}/${LeadingNumbers}${FileTitle}.$Fileext"
         mv -n "$Path" "$NewPath" >/dev/null 2>&1
 
         # delete html rendition
         rm -f "$Path.html"
 
         Path="$NewPath"
+    else
+        echo  "Warning: No BOM (byte order mark) followed by YAML header" >&2
+        echo  "found! Filename is not changed." >&2
     fi
 
     # Return global variable
