@@ -34,7 +34,7 @@ LaunchViewer () {
 
     # Alternative 4: no viewer (viewer is part of editor)
     # If your editor has an integrated viewer (like Atom)
-    # uncomment every line above, but we need this:
+    # comment out all lines above, but we still need this:
     return 0
 }
 
@@ -305,7 +305,7 @@ PandocNewNote () {
     if [ -n "$1" ] && [ -f "$1" ] ; then
         Dir="$(dirname "$1")"
         Basename="$(basename "$1")"
-        DocRef="Annotations on [file]($Basename)"
+        DocRef="<file:$Basename>"
         SanitizeFilename "$Basename"
         NewFileName="$Dir/${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
     elif [ -n "$1" ] && [ -d "$1" ] ; then
@@ -341,8 +341,6 @@ date:     $Datestr
 revision: 1.0
 fileext:  $DEFAULT_EXT
 ---
-
-
 
 $DocRef
 
