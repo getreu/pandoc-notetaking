@@ -18,7 +18,7 @@ LaunchViewer () {
     # In Firefox install the auto-reload plugin from:
     # https://addons.mozilla.org/en-US/firefox/addon/auto-reload/
     RenderHtmlWithPandoc "$1"
-    firefox  "file:///$1.html" &> /dev/null &
+    firefox  "file:///$1.html" 2>&1 >/dev/null   &
 
     # Alternative 2: Render and view with Firefox
     # This solution renders markdown in the following plugin
@@ -376,7 +376,7 @@ PandocView () {
     if [ -n "$MD_VIEWER" ]; then
         "$MD_VIEWER" "$MD_VIEWER_OPT$PandocView" &
     else
-        LaunchViewer "$PandocView" >&- 2>&-
+        LaunchViewer "$PandocView" 
     fi
     # Return global variable PandocView
 }
