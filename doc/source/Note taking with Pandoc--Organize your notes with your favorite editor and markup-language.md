@@ -11,7 +11,7 @@ lang: en
 
 Markup languages like _Markdown_, _ReStructuredText_, _asciidoc_, _textile_,
 _txt2tags_ or _mediawiki_ are perfectly suited for fast note taking. Type your
-notes with your favorite editor, using your favorite markup language[^1] and
+notes with your favorite editor, chose your favorite markup language[^1] and
 view them with _Chromium_, _Chrome_ or _Firefox_[^2].
 
 All you need is this `pandoc-note` script, the [Pandoc](http://pandoc.org)
@@ -23,7 +23,7 @@ depending on it’s options (see [Invoking pandoc-note]):
 
 Create a new note
 
-*   Creates a new context depending notes-plain-text-file with an YAML
+*   Creates a new context-dependent notes-plain-text-file with an YAML
     metadata header.
 
 Edit notes
