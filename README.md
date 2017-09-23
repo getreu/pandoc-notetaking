@@ -20,20 +20,22 @@ depending on it’s options (see [Invoking pandoc-note]):
 
 Create a new note
 
-*   Creates a new context depending notes-plain-text-file with an YAML
+*   creates a new context depending notes-plain-text-file with an YAML
     metadata header.
 
 Edit notes
 
-*   Launches an editor and a live-previewer (Firefox, Chrome or Chromium).
+*   detects the markup-language of the note file, converts to html, launches an
+    editor and a live-previewer (Firefox, Chrome or Chromium).
 
 View notes
 
-*   Launches a live-previewer (Firefox, Chrome or Chromium).
+*   detects the markup-language of the note file, converts to html and launches
+    a live-previewer (Firefox, Chrome or Chromium).
 
 Sync filename
 
-*   Renames the filename to be in sync with the document’s YAML metadata
+*   renames the filename to be in sync with the document’s YAML metadata
     header.
 
 The project is hosted on Github:
