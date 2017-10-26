@@ -34,7 +34,7 @@ LaunchViewer () {
 
     # Alternative 4: no viewer (viewer is part of editor)
     # If your editor has an integrated viewer (like Atom)
-    # comment out all lines above, but we still need this:
+    # comment all lines above, but always keep the following line:
     return 0
 }
 
@@ -58,6 +58,8 @@ LaunchEditor () {
     # or use neovim >= 0.2.0
     #nvim-qt --nofork "$1"
 
+
+    # keep this line
     return 0
 }
 
@@ -309,7 +311,7 @@ PandocNewNote () {
     if [ -n "$1" ] && [ -f "$1" ] ; then
         Dir="$(dirname "$1")"
         Basename="$(basename "$1")"
-        DocRef="<file:$Basename>"
+        DocRef="Annotations on [file]($Basename)"
         SanitizeFilename "$Basename"
         NewFileName="$Dir/${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
     elif [ -n "$1" ] && [ -d "$1" ] ; then
