@@ -1,9 +1,9 @@
----
+﻿---
 title: 'Note taking with Pandoc'
 subtitle: 'Organize your notes with your favorite editor and markup-language'
 author: Jens Getreu
-date: 9.8.2017
-version: v1.1
+date: 3.11.2017
+version: v2.0
 file-ext: md
 lang: en
 ---
@@ -208,41 +208,57 @@ Windows
 ## Invoking pandoc-note
 
 ``` {.bash}
+ pandoc-note --help
  pandoc-note -h
 ```
 
 shows a short help text with available command line options:
 
-    /usr/local/bin/pandoc-note creates, edits or views an markdown note.
+```
+/usr/local/bin/pandoc-note creates, edits or views a note with markups.
 
-    usage:
+usage:
 
-       /usr/local/bin/pandoc-note [-h][-ro|-so|-eo] | [<File.md>|<Dir>|<File>]
+   /usr/local/bin/pandoc-note [-h][-v|-e|-s] | [<Textfile>.<Ext>|<File>|<Dir>]
 
-    <Dir>|<File>: directory where the new note file will be created
-    (current directory if none).
-    If <File> is given a new note file will be created next to that file.
-    If <File.md> is given the file is edited.
-    Filename of <File> is changed when not in sync with YAML header.
+<Dir>|<File>: directory where the new note file will be created
+(current directory if none).
+If a binary <File> is given a new note file will be created next
+to <FILE>.
+A given <Textfile> is opened and edited. <Ext> determines
+the markup-language such as Markdown, ReStructuredText, MediaWiki
+and others.
+Filename of <File> is changed when not in sync with the file's
+metadata YAML block.
 
-    Options:
-    -ro     Do not open editor, open viewer only.
-    -eo     Do not open viewer, only new note or, sync filename and edit.
-    -so     Do not open editor or viewer, only new note or sync filename.
+Options:
 
-+-------------+-------------+-------------+-------------+-------------+
-| Option      | Create a    | Launch      | Launch      | Sync        |
-|             | new note    | editor      | viewer      | title-filen |
-|             |             |             |             | ame         |
-+=============+=============+=============+=============+=============+
-| *without*   | Y \*        | Y           | Y           | Y           |
-+-------------+-------------+-------------+-------------+-------------+
-| `-ro`       | Y \*        | N           | Y           | N           |
-+-------------+-------------+-------------+-------------+-------------+
-| `-eo`       | Y \*        | Y           | N           | Y           |
-+-------------+-------------+-------------+-------------+-------------+
-| `-so`       | Y \*        | N           | N           | Y           |
-+-------------+-------------+-------------+-------------+-------------+
+--view,
+-v	Do not open editor, open viewer only.
+
+--edit,
+-e	Do not open viewer, only new note or, sync filename and edit.
+
+--sync,
+-s	Do not open editor or viewer, only new note or sync filename.
+
+--help,
+-h	Show this message.
+```
+
++-----------------+-------------+-------------+-------------+-------------+
+| Option          | Create a    | Launch      | Launch      | Sync        |
+|                 | new note    | editor      | viewer      | title-filen |
+|                 |             |             |             | ame         |
++=================+=============+=============+=============+=============+
+| *without*       | Y \*        | Y           | Y           | Y           |
++-----------------+-------------+-------------+-------------+-------------+
+| `-v`, `--view`  | Y \*        | N           | Y           | N           |
++-----------------+-------------+-------------+-------------+-------------+
+| `-e`, `--edit`  | Y \*        | Y           | N           | Y           |
++-----------------+-------------+-------------+-------------+-------------+
+| `-s`, `--sync`  | Y \*        | N           | N           | Y           |
++-----------------+-------------+-------------+-------------+-------------+
 
 Table: `pandoc-note` options
 
@@ -453,7 +469,8 @@ create this note [^3]:
 ## Syntax
 
 ``` {.bash}
-  pandoc-note -ro <path>/<filename>.<ext>
+  pandoc-note --view <path>/<filename>.<ext>
+  pandoc-note -v <path>/<filename>.<ext>
 ```
 
 launches your preferred viewer: `firefox` or `chromium`[^4].

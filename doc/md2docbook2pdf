@@ -30,7 +30,7 @@ echo fopub -H  "$OutDir/$XmlFile"
 fopub -H  "$OutDir/$XmlFile" && \
 	rm  "$OutDir/$XmlFile" && \
     rm  -v -r "$OutDir/images/" && \
-	mupdf "$OutDir/$PdfFile" & 
+	atril "$OutDir/$PdfFile" & 
 
 }
 

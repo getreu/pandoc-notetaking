@@ -1,6 +1,6 @@
 #!/bin/dash
 # Author: Jens Getreu
-# 4.7.2017
+# 3.11.2017
 # license: MIT
 
 ### CONFIGURATION SECTION START
@@ -116,10 +116,10 @@ RenderHtmlWithPandoc () {
 
 
 Main () {
-    if  [ "-h" = "$1" ]; then
+    if  [ "-h" = "$1" ] || [ "--help" = "$1" ]; then
         echo "\n${0} creates, edits or views a note with markups."
         echo "\nusage:"
-        echo "\n   $_ [-h][-ro|-so|-eo] | [<Textfile>.<Ext>|<File>|<Dir>]"
+        echo "\n   $_ [-h][-v|-e|-s] | [<Textfile>.<Ext>|<File>|<Dir>]"
         echo "\n<Dir>|<File>: directory where the new note file will be created"
         echo "(current directory if none)."
         echo "If a binary <File> is given a new note file will be created next"
@@ -129,16 +129,27 @@ Main () {
         echo "and others."
         echo "Filename of <File> is changed when not in sync with the file's"
         echo "metadata YAML block."
-        echo "\nOptions:"
-        echo "-ro\tDo not open editor, open viewer only."
-        echo "-eo\tDo not open viewer, only new note or, sync filename and edit."
-        echo "-so\tDo not open editor or viewer, only new note or sync filename."
+        echo "\nOptions:\n"
+        echo "--view,"
+        echo "-v\tDo not open editor, open viewer only."
+        echo
+        echo "--edit,"
+        echo "-e\tDo not open viewer, only new note or, sync filename and edit."
+        echo
+        echo "--sync,"
+        echo "-s\tDo not open editor or viewer, only new note or sync filename."
+        echo
+        echo "--help,"
+        echo "-h\tShow this message."
         exit 0
     fi
 
     local Path
     local Option
-    if  [ "-ro" = "$1" ] || [ "-so" = "$1" ] || [ "-eo" = "$1" ] ; then
+    if  [ "-v" = "$1" ] || [ "-s" = "$1" ] || [ "-e" = "$1" ] || \
+        [ "--view" = "$1" ] || \
+        [ "--sync" = "$1" ] || \
+        [ "--edit" = "$1" ] ; then
         Option="$1"
         Readlink "$2"
     else
@@ -158,16 +169,16 @@ Main () {
     fi
 
     if [ -f "$Path" ] ; then
-        if  [ ! "-ro" = "$Option" ] ; then
+        if  [ ! "-v" = "$Option" ] && [ ! "--view" = "$Option" ]; then
             SyncFilename "$Path"
             Path="$SyncFilename"
         fi
-        if  [ ! "-eo" = "$Option" ] && \
-            [ ! "-so" = "$Option" ] ; then
+        if  ( [ ! "-e" = "$Option" ] && [ ! "--edit" = "$Option" ] ) && \
+            ( [ ! "-s" = "$Option" ] && [ ! "--sync" = "$Option" ] ); then
             PandocView "$Path"
         fi
-        if  [ ! "-ro" = "$Option" ] && \
-            [ ! "-so" = "$Option" ] ; then
+        if  ( [ ! "-v" = "$Option" ] && [ ! "--view" = "$Option" ] ) && \
+            ( [ ! "-s" = "$Option" ] && [ ! "--sync" = "$Option" ] ); then
             PandocEdit "$Path"
             SyncFilename "$PandocEdit"
             Path="$SyncFilename"
