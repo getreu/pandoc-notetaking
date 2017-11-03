@@ -777,7 +777,7 @@ into _html_.  You can choose among the following:
     >
     > New notes are created with an Unicode BOM indicating Unicode
     > encoding. Do not use the `notepad` editor as it does not
-    > understand Unicode. Use `Wordpad` or and other modern Unicode
+    > understand Unicode. Use `Wordpad` or any other modern Unicode
     > editor instead.
 
     Here you can specify what browser you want to use, e.g. if you
