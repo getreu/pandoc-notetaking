@@ -322,7 +322,14 @@ PandocNewNote () {
     if [ -n "$1" ] && [ -f "$1" ] ; then
         Dir="$(dirname "$1")"
         Basename="$(basename "$1")"
-        DocRef="Annotations on [file]($Basename)"
+        if [ "$DEFAULT_EXT" = "md" ] ; then
+            DocRef="Annotations on [file]($Basename)"
+        elif [ "$DEFAULT_EXT" = "rst" ] ; then
+            DocRef="Annotations on \`file <$Basename>\`_"
+        else
+            echo nothing
+            DocRef=""
+        fi
         SanitizeFilename "$Basename"
         NewFileName="$Dir/${SanitizeFilename}${FileSubtitle}.$DEFAULT_EXT"
     elif [ -n "$1" ] && [ -d "$1" ] ; then
@@ -393,7 +400,7 @@ PandocView () {
     if [ -n "$MD_VIEWER" ]; then
         "$MD_VIEWER" "$MD_VIEWER_OPT$PandocView" &
     else
-        LaunchViewer "$PandocView" 
+        LaunchViewer "$PandocView"
     fi
     # Return global variable PandocView
 }
