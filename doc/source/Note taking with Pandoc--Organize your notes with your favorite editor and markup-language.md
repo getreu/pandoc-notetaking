@@ -476,13 +476,13 @@ create this note [^3]:
 launches your preferred viewer: `firefox` or `chromium`[^4].
 
 [^4]: `pandoc-note` can be also configured not to use a viewer when your
-      editor has a build in _markdown_-viewer. In this case `-ro` is ignored.
+      editor has a build in _markdown_-viewer. In this case `-v` is ignored.
 
 
 ## Example
 
 ``` {.bash}
-  pandoc-note -ro 'Implementing the NIST Cybersecurity Framework.pdf--Notes.md'
+  pandoc-note -v 'Implementing the NIST Cybersecurity Framework.pdf--Notes.md'
 ```
 
 ![view invokation example](images/view.png){width="70%"}
