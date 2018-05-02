@@ -501,28 +501,28 @@ Consider the following note file:
 
 The filename has 4 parts:
 
-    <order mark>-<simplified-title>--<simplified-subtitle>.<ext>
+    <sort tag>-<simplified-title>--<simplified-subtitle>.<ext>
 
-A `<order mark>` can be a
+A `<sort tag>` can be a
 
--   *chronological order mark* or
+-   *chronological sort tag* or
 
         20140211-
         20151208-
 
--   *a sequence number order mark*.
+-   *a sequence number sort tag*.
 
         02-
         08-
         09_02-
 
-`<order mark>` can be any combination of `0123456789-_`.
+`<sort tag>` can be any combination of `0123456789-_`.
 
 When `pandoc-note` creates a new note based on a directory it prepends a
-*chronological order mark* of today. The `<simplified-title>` part is
-derived from the parent directory name omitting its own *order mark*.
+*chronological sort tag* of today. The `<simplified-title>` part is
+derived from the parent directory name omitting its own *sort tag*.
 
-![filing system: sequence number order mark](images/filing-system1.png){width="70%"}
+![filing system: sequence number sort tag](images/filing-system1.png){width="70%"}
 
 ``` {.bash}
   pandoc-note '10-Mein Körper'
@@ -530,29 +530,29 @@ derived from the parent directory name omitting its own *order mark*.
 
 will result in a new file:
 
-![filing system: chronological order mark](images/filing-system2.png){width="50%"}
+![filing system: chronological sort tag](images/filing-system2.png){width="50%"}
 
     10-Mein Körper/20151209-Mein Körper--Notes.md
 
 > **Note**
 >
-> The parent directory’s order mark is never used to compose a filename
+> The parent directory’s sort tag is never used to compose a filename
 > for a new note.
 
-When `pandoc-note` creates a new note based on a filename no *order mark*
+When `pandoc-note` creates a new note based on a filename no *sort tag*
 is prepended.
 
 Before and after editing the `pandoc-note` analyses the `title`, `subtitle` and
-`fileext` of the YAML header of the markdown file and simplifies them in a
+`fileext` of the YAML header of the markdown file and simplifies them a
 filesystem friendly form.  If the result does not equal to
 `<simplified-title>--<simplified-subtitle>.<ext>` the filename is changed on
-disk.  Possible *order marks* remain untouched.
+disk.  Possible *sort tags* remain untouched.
 
 
 > **Important**
 >
 > `pandoc-note` might change the note’s filename but never changes an
-> *order mark*!
+> *sort tag*!
 
 For details about how the metadata is simplified into a
 `<simplified-title>--<simplified-subtitle>` string refer to the
