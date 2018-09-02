@@ -615,8 +615,11 @@ invoking shell as long as your are editing. This is the only way for
 `pandoc-note` to know when you finished editing. Most editors work this way,
 some like `vim` can be invoked with `vim --no-fork` to achieve this behaviour.
 
-Do not use `Notepad` under Windows as it does not support Unicode. Use
-`Wordpad` instead.
+New notes are created with an Unicode BOM indicating Unicode encoding.  Do not
+use the `notepad` editor with Windows older then Vista as older versions of
+`notepad` do not handle Unicode correctly. Use `Wordpad` or and other modern
+Unicode editor instead.
+
 
 **Configuration Linux**
 
@@ -775,10 +778,10 @@ into _html_.  You can choose among the following:
 
     > **Important**
     >
-    > New notes are created with an Unicode BOM indicating Unicode
-    > encoding. Do not use the `notepad` editor as it does not
-    > understand Unicode. Use `Wordpad` or any other modern Unicode
-    > editor instead.
+    > New notes are created with an Unicode BOM indicating Unicode encoding. Do
+    > not use the `notepad` editor coming with Windows older than Windows Vista.
+    > These old versions do not handle Unicode correctly. Use
+    > `Wordpad` or any other modern Unicode editor instead.
 
     Here you can specify what browser you want to use, e.g. if you
     choose `firefox.exe` or `chromium.exe` and you can specify the
