@@ -1,6 +1,7 @@
 #!/bin/dash
 # Author: Jens Getreu
 # 3.11.2017
+# 2.2.2019
 # license: MIT
 
 ### CONFIGURATION SECTION START
@@ -358,8 +359,8 @@ PandocNewNote () {
 
         # Create new file according to template (with unicode BOM)
         printf  "\357\273\277---
-title:    '${Basename}'
-subtitle: '${Subtitle}'
+title:    ${Basename}
+subtitle: ${Subtitle}
 author:   $USER
 date:     $Datestr
 revision: 1.0
