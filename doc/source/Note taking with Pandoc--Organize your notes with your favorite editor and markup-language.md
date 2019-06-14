@@ -68,7 +68,7 @@ A fellow student still uses paper and pen. I ask her why and she replied
 “I can better concentrate. My computer distracts me. I will do all other
 things, but not listening.”.
 
-This is certainly true. As I am concerned I am not good at logistics.
+This is certainly true. As far as I am concerned, I am not good at logistics.
 For me having all documents and notes in one little machine is a
 blessing.
 
@@ -543,8 +543,8 @@ When `pandoc-note` creates a new note based on a filename no *sort tag*
 is prepended.
 
 Before and after editing the `pandoc-note` analyses the `title`, `subtitle` and
-`fileext` of the YAML header of the markdown file and simplifies them a
-filesystem friendly form.  If the result does not equal to
+`fileext` of the YAML header of the markdown file. Then it simplifies them in a
+filesystem friendly form. If the result does not equal to
 `<simplified-title>--<simplified-subtitle>.<ext>` the filename is changed on
 disk.  Possible *sort tags* remain untouched.
 
@@ -615,8 +615,8 @@ invoking shell as long as your are editing. This is the only way for
 `pandoc-note` to know when you finished editing. Most editors work this way,
 some like `vim` can be invoked with `vim --no-fork` to achieve this behaviour.
 
-New notes are created with an Unicode BOM indicating Unicode encoding.  Do not
-use the `notepad` editor with Windows older then Vista as older versions of
+New notes are created with a Unicode BOM indicating Unicode encoding.  Do not
+use the `notepad` editor with Windows older than Vista as older versions of
 `notepad` do not handle Unicode correctly. Use `Wordpad` or and other modern
 Unicode editor instead.
 
@@ -652,7 +652,7 @@ into _html_.  You can choose among the following:
     Currently this solution works only under Linux because it relies on the
     `inotify-tools` package with is not available in _BusyBox_.
 
- b. Render and wiew with _Firefox_
+ b. Render and view with _Firefox_
 
     In Firefox install the _markdown-viewer-webext_ plugin from [here](
     https://addons.mozilla.org/en-US/firefox/addon/markdown-viewer-webext/).
@@ -794,17 +794,17 @@ into _html_.  You can choose among the following:
     See the Section [Editor] and the Section [Live previewer] for details.
 
 
-6.  Create a shortcut to `pandoc-note.bat` on your desktop, click on
+#.  Create a shortcut to `pandoc-note.bat` on your desktop, click on
     properties and change the shortcut to *run minimized*. Let the
     *start in* path empty.
 
     ![shortcut properties](images/shortcut-properties.png){width=60%}
 
-7.  Test the installation: drag a file or directory on the
+#.  Test the installation: drag a file or directory on the
     `pandoc-note Shortcut` on your desktop. An *editor* and *viewer*
     window should open.
 
-8.  Optional: integrate the scripts with your file-manager (see
+#.  Optional: integrate the scripts with your file-manager (see
     [Windows file explorer configuration]).
 
 
@@ -831,28 +831,28 @@ configuration](images/custom_actions.png){width="60%"}
 
 ### Windows file explorer configuration
 
-1.  Open a folder containing an `.md` file.
+1. Open a folder containing an `.md` file.
 
-2.  Right-click the `.md` file and point to *Open with* and then click
-    *Choose default program*.
+2. Right-click the `.md` file and point to *Open with* and then click
+   *Choose default program*.
 
-    ![Choose default program...](images/explorer1.png){width="100%"}
+   ![Choose default program...](images/explorer1.png){width="100%"}
 
-3.  Select the *Always use the selected program* and then click
-    *Browse…​*.
+3. Select the *Always use the selected program* and then click
+   *Browse…​*.
 
-    ![Browse to...](images/explorer2.png){width="70%"}
+   ![Browse to...](images/explorer2.png){width="70%"}
 
-4.  Click *Browse…​* then browse to your *BIN\_DIR* directory, select
-    `pandoc-note.bak` and click *Open* and later *Ok*.
+4. Click *Browse…​* then browse to your *BIN\_DIR* directory, select
+   `pandoc-note.bak` and click *Open* and later *Ok*.
 
-    ![Browse to `pandoc-note`](images/explorer3.png){width="70%"}
+   ![Browse to `pandoc-note`](images/explorer3.png){width="70%"}
 
 Further reading:
 
--   [Change the program that opens a type of
-    file](http://windows.microsoft.com/en-us/windows/change-file-open-program#1TC=windows-7)
+-  [Change the program that opens a type of
+   file](http://windows.microsoft.com/en-us/windows/change-file-open-program#1TC=windows-7)
 
--   [How to Add Any Application Shortcut to Windows Explorer’s Context
-    Menu](http://www.howtogeek.com/107965/how-to-add-any-application-shortcut-to-windows-explorers-context-menu/).
+-  [How to Add Any Application Shortcut to Windows Explorer’s Context
+   Menu](http://www.howtogeek.com/107965/how-to-add-any-application-shortcut-to-windows-explorers-context-menu/).
 
