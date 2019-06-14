@@ -1,7 +1,6 @@
 #!/bin/dash
 # Author: Jens Getreu
 # 3.11.2017
-# 2.2.2019
 # license: MIT
 
 ### CONFIGURATION SECTION START
@@ -19,7 +18,7 @@ LaunchViewer () {
     # In Firefox install the auto-reload plugin from:
     # https://addons.mozilla.org/en-US/firefox/addon/auto-reload/
     RenderHtmlWithPandoc "$1"
-    firefox  "file:///$1.html" 2>&1 >/dev/null   &
+    firefox-esr  "file:///$1.html" 2>&1 >/dev/null   &
 
     # Alternative 2: Render and view with Firefox
     # This solution renders markdown in the following plugin
@@ -57,8 +56,13 @@ LaunchEditor () {
     #gvim --nofork "$1"
 
     # or use neovim >= 0.2.0
-    #nvim-qt --nofork "$1"
+    #nvim-qt  "$1"
 
+    # Atom should also stay in foreground
+    #atom  -f  "$1"
+
+    # Visual Studio Code
+    #code -w "$1"
 
     # keep this line
     return 0
