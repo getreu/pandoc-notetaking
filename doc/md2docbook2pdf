@@ -1,40 +1,84 @@
 #!/bin/bash
 # Author: Jens Getreu
 
+# apt install pandoc asciidoctor-fopub
 
 
 render () {
-#set -x
-InPath="$1"
-InFile="${InPath##*/}"
-InBase="${InFile%.md}"
-InDir="${InPath%/*}"
+    ### parse args
 
-OutPath="$2"
-OutFile="${OutPath##*/}"
-OutBase="${OutFile%.pdf}"
-OutDir="${OutPath%/*}"
+    #set -x
+    InPath="$1"
+    InFile="${InPath##*/}"
+    InBase="${InFile%.*}"
+    InDir="${InPath%/*}"
+    if [ "$InDir" = "$InPath" ] ; then
+        InDir="."
+    fi
 
-XmlFile="$OutBase.xml"
-PdfFile="$OutBase.pdf"
+    OutPath="$2"
+    OutFile="${OutPath##*/}"
+    OutBase="${OutFile%.*}"
+    OutDir="${OutPath%/*}"
+    if [ "$OutDir" = "$OutPath" ] ; then
+        OutDir="."
+    fi
 
-mkdir -p "$OutDir"
 
-pandoc --template "$InDir/template.db" -s -t docbook5 -o "$OutDir/$XmlFile" "$InPath"
+    ### Prepare
 
-cp -r  "$InDir/images/" "$OutDir"
+    XmlPath="$OutDir/$OutBase.xml"
+    PdfPath="$OutDir/$OutBase.pdf"
+    TemplatePath="$OutDir/template.db"
+
+    mkdir -p "$OutDir"
 
 
-echo fopub -H  "$OutDir/$XmlFile" 
-#fopub -t ./docbook-xsl  "$OutDir/$XmlFile" && \
-fopub -H  "$OutDir/$XmlFile" && \
-	rm  "$OutDir/$XmlFile" && \
-    rm  -v -r "$OutDir/images/" && \
-	atril "$OutDir/$PdfFile" & 
+    ### Make docbook-template
+    # quoting EOF means parameter substitution turned off
+    cat << "EOF" > "$TemplatePath"
+<?xml version="1.0" encoding="utf-8" ?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+EOF
 
+    # this is only needed for html and xml output                                
+    cp -r  "$InDir/images/" "$OutDir"    
+
+    # Strip off first line of the docbook5 default template and append it
+    pandoc -D docbook5 | tail -n +2 >> "$TemplatePath"
+
+
+    ### Generate XML
+
+    # unfortunately the chain does not honor --number-section yet
+    pandoc --template "$TemplatePath" -s -t docbook5 -o "$XmlPath" "$InPath"
+
+    # this is only needed for html output
+    #cp -r  "$InDir/images/" "$OutDir"
+
+
+    ### Generate PDF
+    fopub -H  "$XmlPath" && \
+        rm  "$XmlPath" && \
+        rm  "$TemplatePath" && \
+        rm  -f -r "$OutDir/images/" 
 }
 
 
-render "source/index.md" \
-       "build/pdf/pandoc-notetaking.pdf" \
-       "build/html/_downloads/"
+
+### Main
+# usage: 
+# render FILE [FILE]
+# render report.md ./rendition/report.pdf
+
+#if [[ -n "${2/[ ]*\n/}" ]] ; then
+#        OutPath="$2"
+#else
+#        OutPath="${1%.*}.pdf" # $2 is empty
+#fi
+#render "$1" "$OutPath" 
+cd source
+render "index.md" \
+       "../build/pdf/pandoc-notetaking.pdf" 
+
