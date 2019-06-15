@@ -1,9 +1,9 @@
 ﻿---
 title: 'Note taking with Pandoc'
-subtitle: 'Organize your notes with your favorite editor and markup-language'
+subtitle: 'Organize your notes with your favourite editor and markup-language'
 author: Jens Getreu
 date: 15.6.2019
-version: v2.2
+version: v2.1
 file-ext: md
 lang: en
 ---
@@ -11,7 +11,7 @@ lang: en
 
 Markup languages like _Markdown_, _ReStructuredText_, _asciidoc_, _textile_,
 _txt2tags_ or _mediawiki_ are perfectly suited for fast note taking. Type your
-notes with your favorite editor, chose your favorite markup language[^1] and
+notes with your favourite editor, chose your favourite markup language[^1] and
 view them with _Chromium_, _Chrome_ or _Firefox_[^2].
 
 All you need is this `pandoc-note` script, the [Pandoc](http://pandoc.org)
@@ -19,7 +19,7 @@ format converter, an editor of your choice and Chromium, Chrome or Firefox as
 live previewer. If not available, `pandoc-note` also works without `pandoc`.
 
 `pandoc-note` runs under Linux and Windows. The script operates in four modes
-depending on it’s options (see [Invoking pandoc-note]):
+depending on its options (see [Invoking pandoc-note]):
 
 Create a new note
 
@@ -262,7 +262,7 @@ Options:
 
 Table: `pandoc-note` options
 
-**Lengend:**
+**Legend:**
 
 Y = yes\
 N = no\
@@ -565,7 +565,7 @@ beginners.  If you just want to get started quickly go to the [Quickstart]
 section for a standard setup.
 
 
-## Choose your favorite markup language
+## Choose your favourite markup language
 
 ### Set the default markup language for new notes
 
@@ -594,18 +594,18 @@ so will change the note's filename extension from `md` to `rst`.
 
 > **Warning**
 >
-> Do not change the filename extension manually, as the change will be
-> reverted next time you open the note with `pandoc-note`. Instead, change
-> the `fileext` variable in the note's header.
+> If the `fileext` variable is defined in the file header, you can not change
+> the filename extension manually. Your change will be reverted next time you
+> open the note with `pandoc-note`. Instead, change the `fileext` variable in
+> the note's header.
 
 
+## Choose your favourite editor and favourite viewer
 
-## Choose your favorite editor and favorite viewer
+### Choose Editor
 
-### Editor
-
-The editor must be an Unicode text editor. Under Linux every editor will do.
-Make sure that your editor does not "fork", meaning that it must block the
+The editor must be a Unicode text editor. Under Linux every editor will do.
+Make sure that your editor does not “fork”, meaning that it must block the
 invoking shell as long as your are editing. This is the only way for
 `pandoc-note` to know when you finished editing. Most editors work this way,
 some like `vim` can be invoked with `vim --no-fork` to achieve this behaviour.
@@ -626,7 +626,7 @@ Unicode editor instead.
 :   Edit the file `pandoc-note.bat` and uncomment one example only.
 
 
-### Live Previewer
+### Choose Live Previewer
 
 The viewer of your choice implies a choice on how you will render _markdown_
 into _html_.  You can choose among the following:
@@ -748,7 +748,7 @@ into _html_.  You can choose among the following:
 #.  Install an [Editor] and a [Live previewer] of your choice (see above).
 
 
-#.  Download the the files `bin/pandoc-note`, `bin/pandoc-note.bat` and
+#.  Download the files `bin/pandoc-note`, `bin/pandoc-note.bat` and
     `bin/busybox.exe` from Github
     [getreu/markdown-notetaking](https://github.com/getreu/markdown-notetaking).
     Alternatively you can copy and paste the listings at end of this

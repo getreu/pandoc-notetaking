@@ -1,1 +1,1 @@
-Note taking with Pandoc--Organize your notes with your favorite editor and markup-language.md
+Note taking with Pandoc--Organize your notes with your favourite editor and markup-language.md
