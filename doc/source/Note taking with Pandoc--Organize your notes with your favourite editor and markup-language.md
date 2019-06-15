@@ -3,7 +3,7 @@ title: 'Note taking with Pandoc'
 subtitle: 'Organize your notes with your favourite editor and markup-language'
 author: Jens Getreu
 date: 15.6.2019
-version: v2.1
+version: v2.2
 file-ext: md
 lang: en
 ---
