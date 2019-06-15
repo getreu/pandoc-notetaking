@@ -2,8 +2,8 @@
 title: 'Note taking with Pandoc'
 subtitle: 'Organize your notes with your favorite editor and markup-language'
 author: Jens Getreu
-date: 3.11.2017
-version: v2.0
+date: 15.6.2019
+version: v2.2
 file-ext: md
 lang: en
 ---
@@ -62,7 +62,7 @@ from the file extension of the text file. Currently `md`, `markdown`, `mkd`,
 
 
 
-## How students take notes
+# How students take notes
 
 A fellow student still uses paper and pen. I ask her why and she replied
 “I can better concentrate. My computer distracts me. I will do all other
@@ -75,7 +75,7 @@ blessing.
 To illustrate how to work with `pandoc-note` here my most common
 workflows.
 
-### The lesson starts
+## The lesson starts
 
 
 ![The folder in which the new note will be
@@ -101,7 +101,7 @@ editor](images/workflow1-6.png){width="60%"}
 > sync with the document's metadata, i.e. title, subtitle and file-extension.
 > For more details see [Document title - filename sync]
 
-### Taking notes about a file
+## Taking notes about a file
 
 ![We want to take a note about a
 pdf](images/workflow2-1.png){width="70%"}
@@ -116,7 +116,7 @@ pdf](images/workflow2-3.png){width="100%"}
 editor](images/workflow2-4.png){width="60%"}
 
 
-## Quickstart
+# Quickstart
 
 `pandoc-note` can be easily configured for your personal preferences and
 needs[^set-up].
@@ -128,7 +128,7 @@ The default setup runs under Linux and uses `leafpad` as editor and
 [^set-up]: For a personalized setup read the installation guide for
            [Linux](#linux) or [Windows](#windows).
 
-### Install dependencies
+## Install dependencies
 
 #. Install the following packages:
 
@@ -146,7 +146,7 @@ The default setup runs under Linux and uses `leafpad` as editor and
           sudo chown a+x pandoc-note
 
 
-### Run `pandoc-note`
+## Run `pandoc-note`
 
 On a shell type:
 
@@ -157,7 +157,7 @@ or:
         pandoc-note <file-to-annotate>
 
 
-### Optional personalization
+## Optional personalization
 
 * Your preferred markup language is not *markdown*, but *reStructuredText*,
   *t2t*, *textile*, *twiki*, *mediawiki* or *asciidoc*? Change it!
@@ -174,7 +174,7 @@ setup.
 Read [Linux file manager configuration].
 
 
-## Create a new note
+# Create a new note
 
 There are several ways to launch `pandoc-note`.
 
@@ -205,7 +205,7 @@ Windows
         *pandoc-note* in the context menu. See also
         [Windows file explorer configuration].
 
-### Invoking pandoc-note
+## Invoking pandoc-note
 
 ``` {.bash}
  pandoc-note --help
@@ -269,9 +269,9 @@ N = no\
 \* = If a note with the same filename exists on disk already, no new
 note is created.
 
-### Directory as parameter
+## Directory as parameter
 
-#### Syntax
+### Syntax
 
 ``` {.bash}
  pandoc-note <path>/<dir>
@@ -288,11 +288,10 @@ subtitle: ''
 author:   <login name>
 date:     <current date>
 revision: 1.0
-fileext:  md
 ---
 ```
 
-#### Example
+### Example
 
 ``` {.bash}
  pandoc-note 'doc/Lecture 1'
@@ -309,14 +308,13 @@ subtitle: 'Notes'
 author:   getreu
 date:     2017-08-09
 revision: 1.1
-fileext:  md
 ---
 ```
 
-### No parameter
+## No parameter
 
 
-#### Syntax
+### Syntax
 
 It is also possible to invoke the script without options:
 
@@ -327,7 +325,7 @@ It is also possible to invoke the script without options:
 The result is the same as above but the current working directory is
 used for `<path>/<dir>`.
 
-#### Example
+### Example
 
 ``` {.bash}
  cd 'doc/Lecture 1'
@@ -345,11 +343,10 @@ subtitle: 'Notes'
 author:   getreu
 date:     2017-08-09
 revision: 1.0
-fileext:  md
 ---
 ```
 
-### Filename as parameter
+## Filename as parameter
 
 
 The filename should be some existing local file you want to annotate.
@@ -357,7 +354,7 @@ For example I use this feature to note from where I have downloaded a
 .pdf.
 
 
-#### Syntax
+### Syntax
 
 When invoke with a filename, no date stamp is prepended.
 
@@ -380,13 +377,12 @@ subtitle: 'Notes'
 author:   <login name>
 date:     <current date>
 revision: 1.0
-fileext:  md
 ---
 
 Annotations on [file](<path>/<dir>/<filename>.<ext>)
 ```
 
-#### Example
+### Example
 
 ``` {.bash}
  pandoc-note 'doc/Implementing the NIST Cybersecurity Framework.pdf'
@@ -405,7 +401,6 @@ subtitle: 'Notes'
 author:   getreu
 date:     2017-08-09
 revision: 1.0
-fileext:  md
 ---
 
 Annotations on [file](Implementing the NIST Cybersecurity Framework.pdf)
@@ -418,9 +413,9 @@ a live-previewer showing the rendered text file:
 ![example filename](images/example-filename.png){width="70%"}
 
 
-## Editing notes
+# Editing notes
 
-### Syntax
+## Syntax
 
 
 ``` {.bash}
@@ -444,7 +439,7 @@ you to find your notes quickly in your directory structure. See
 
 
 
-### Example
+## Example
 
 
 ``` {.bash}
@@ -463,10 +458,10 @@ create this note [^3]:
       note file in the meantime!
 
 
-## Viewing notes
+# Viewing notes
 
 
-### Syntax
+## Syntax
 
 ``` {.bash}
   pandoc-note --view <path>/<filename>.<ext>
@@ -479,7 +474,7 @@ launches your preferred viewer: `firefox` or `chromium`[^4].
       editor has a build in _markdown_-viewer. In this case `-v` is ignored.
 
 
-### Example
+## Example
 
 ``` {.bash}
   pandoc-note -v 'Implementing the NIST Cybersecurity Framework.pdf--Notes.md'
@@ -493,7 +488,7 @@ hand”. This is particularly useful for quickly writing down the source
 of a downloaded document.
 
 
-## Document title - filename sync
+# Document title - filename sync
 
 Consider the following note file:
 
@@ -543,8 +538,8 @@ When `pandoc-note` creates a new note based on a filename no *sort tag*
 is prepended.
 
 Before and after editing the `pandoc-note` analyses the `title`, `subtitle` and
-`fileext` of the YAML header of the markdown file. Then it simplifies them in a
-filesystem friendly form. If the result does not equal to
+`fileext` variables of the YAML header of the markdown file. Then it simplifies
+them in a filesystem friendly form. If the result does not equal to
 `<simplified-title>--<simplified-subtitle>.<ext>` the filename is changed on
 disk.  Possible *sort tags* remain untouched.
 
@@ -560,7 +555,7 @@ For details about how the metadata is simplified into a
 
 
 
-## Personalized installation and configuration
+# Personalized installation and configuration
 
 `pandoc-note` runs on Linux and Windows. For Windows installation and
 configuration see [Windows] below.
@@ -570,19 +565,19 @@ beginners.  If you just want to get started quickly go to the [Quickstart]
 section for a standard setup.
 
 
-### Choose your favorite markup language
+## Choose your favorite markup language
 
-#### Set the default markup language for new notes
+### Set the default markup language for new notes
 
 The default markup language for new notes is _Markdown_. To change the default
-modify the `DEFAULT_EXT` variable in the `#### CONFIGURATION SECTION` of
+modify the `DEFAULT_EXT` variable in the `### CONFIGURATION SECTION` of
 `pandoc-note`, e.g. `DEFAULT_EXT="rst"` sets the default for new notes to
 _ReStructuredText_. Valid values are: `md`, `markdown`, `mkd`, `rst`, `rest`,
 `txt`, `t2t`, `textile`, `twiki` and `mediawiki` (cf. Markups variable in
 pandoc-note).
 
 
-#### Change the markup language for an existing note
+### Change the markup language for an existing note
 
 `pandoc-note` determines the markup language by the note's filename extension.
 For example `md` means that the note is formatted in _Markdown_.  Like the
@@ -605,9 +600,9 @@ so will change the note's filename extension from `md` to `rst`.
 
 
 
-### Choose your favorite editor and favorite viewer
+## Choose your favorite editor and favorite viewer
 
-#### Editor
+### Editor
 
 The editor must be an Unicode text editor. Under Linux every editor will do.
 Make sure that your editor does not "fork", meaning that it must block the
@@ -631,7 +626,7 @@ Unicode editor instead.
 :   Edit the file `pandoc-note.bat` and uncomment one example only.
 
 
-#### Live Previewer
+### Live Previewer
 
 The viewer of your choice implies a choice on how you will render _markdown_
 into _html_.  You can choose among the following:
@@ -698,7 +693,7 @@ into _html_.  You can choose among the following:
 
 :   Edit the file `pandoc-note.bat` and uncomment one example only.
 
-### Linux
+## Linux
 
 #.  Install an [Editor] and a [Live previewer] of your choice (see above).
 
@@ -747,7 +742,7 @@ into _html_.  You can choose among the following:
     [Linux file manager configuration]).
 
 
-### Windows
+## Windows
 
 
 #.  Install an [Editor] and a [Live previewer] of your choice (see above).
@@ -808,12 +803,12 @@ into _html_.  You can choose among the following:
     [Windows file explorer configuration]).
 
 
-### Integration with file manager
+## Integration with file manager
 
 This section shows how to integrate `pandoc-note` with your file manager.
 
 
-#### Linux file manager configuration
+### Linux file manager configuration
 
 The example below shows the *Thunar* filebrowser’s custom actions.
 
@@ -829,7 +824,7 @@ configuration](images/custom_actions.png){width="60%"}
 
 ![Appearance Condition](images/appearance-condition.png){width="60%"}
 
-#### Windows file explorer configuration
+### Windows file explorer configuration
 
 1. Open a folder containing an `.md` file.
 
