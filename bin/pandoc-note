@@ -254,15 +254,15 @@ SyncFilename () {
     # Pathname of the markdown-file
     local Path
     Path="$1"
+    local FileExt="${Path##*.}"
 
     # Change filename according to the title in the
     # header of the .md file.
 
     eval $(ParseYaml "$Path")
 
-    local Fileext="$DEFAULT_EXT"
     if [ "$fileext" != "" ] ; then
-        Fileext="$fileext"
+        FileExt="$fileext"
     fi
 
     local Title="$title"
@@ -297,7 +297,7 @@ SyncFilename () {
         # Construct new name
         local DirName
         DirName="$(dirname "$Path")"
-        local NewPath="${DirName}/${LeadingNumbers}${FileTitle}.$Fileext"
+        local NewPath="${DirName}/${LeadingNumbers}${FileTitle}.$FileExt"
         mv -n "$Path" "$NewPath" >/dev/null 2>&1
 
         # delete html rendition
