@@ -1,6 +1,6 @@
 #!/bin/dash
 # Author: Jens Getreu
-# 3.11.2017
+# 15.6.2019
 # license: MIT
 
 ### CONFIGURATION SECTION START
@@ -231,7 +231,7 @@ ParseYaml () {
    local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
    # line 1: keep only the YAML header lines if they exist
    # First byte is BOM
-   sed  -e '/^\xef\xbb\xbf---$/,/^---$/ !d' \
+   sed  -e '/^\xef\xbb\xbf---$/,/^[-.][-.][-.]$/ !d' \
        -ne "s|^\($s\):|\1|" \
         -e 's|`||g;s|\$||g;' \
         -e "s|^\($s\)\($w\)$s:$s[\"']\(.*\)[\"']$s\$|\1$fs\2$fs\3|p" \
