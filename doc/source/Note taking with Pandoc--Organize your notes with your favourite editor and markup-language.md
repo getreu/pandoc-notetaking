@@ -143,7 +143,7 @@ The default setup runs under Linux and uses `leafpad` as editor and
 
           cd /usr/local/bin
           sudo wget https://raw.githubusercontent.com/getreu/pandoc-notetaking/master/bin/pandoc-note
-          sudo chown a+x pandoc-note
+          sudo chmod a+x pandoc-note
 
 
 ## Run `pandoc-note`
