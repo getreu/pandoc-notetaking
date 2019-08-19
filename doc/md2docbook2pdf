@@ -2,7 +2,7 @@
 # Author: Jens Getreu
 
 # apt install pandoc asciidoctor-fopub
-
+FOPUBPATH=/usr/local/java-deployment/asciidoctor-fopub/fopub
 
 render () {
     ### parse args
@@ -59,7 +59,7 @@ EOF
 
 
     ### Generate PDF
-    fopub -H  "$XmlPath" && \
+    "$FOPUBPATH" -H "$XmlPath" && \
         rm  "$XmlPath" && \
         rm  "$TemplatePath" && \
         rm  -f -r "$OutDir/images/" 
