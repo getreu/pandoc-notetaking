@@ -135,7 +135,7 @@ The default setup runs under Linux and uses `leafpad` as editor and
           apt-get install pandoc inotify-tools leafpad firefox
 
 
-#. Install the [auto-reload](https://addons.mozilla.org/en-US/firefox/addon/auto-reload/)
+#. Install the [auto-reload-tab](https://addons.mozilla.org/en-US/firefox/addon/auto-reload-tab/)
    plugin in Firefox.
 
 
@@ -637,8 +637,8 @@ into _html_.  You can choose among the following:
 
         sudo apt-get install pandoc inotify-tools
 
-    In Firefox install the _auto-reload_ plugin from [here](
-    https://addons.mozilla.org/en-US/firefox/addon/auto-reload/).
+    In Firefox install the _auto-reload-tab_ plugin from [here](
+    https://addons.mozilla.org/en-US/firefox/addon/auto-reload-tab/)
 
     This is my preferred solution because you are free to use
     any markup language Pandoc supports, e.g. _ReStructuredText_,
