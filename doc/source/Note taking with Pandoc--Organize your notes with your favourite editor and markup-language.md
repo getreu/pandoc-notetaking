@@ -2,12 +2,24 @@
 title: 'Note taking with Pandoc'
 subtitle: 'Organize your notes with your favourite editor and markup-language'
 author: Jens Getreu
-date: 15.6.2019
+date: 12.3.2020
 version: v2.2
 file-ext: md
 lang: en
 ---
 
+
+```{=docbook}
+<?dbfo-need height="10cm" ?>
+```
+
+>  **NOTE: this project is discontinued and superseded by 
+   [tp-note](https://blog.getreu.net/projects/tp-note/). Please use *Tp-Note*
+   instead.**
+
+```{=docbook}
+<?dbfo-need height="20cm" ?>
+```
 
 Markup languages like _Markdown_, _ReStructuredText_, _asciidoc_, _textile_,
 _txt2tags_ or _mediawiki_ are perfectly suited for fast note taking. Type your
