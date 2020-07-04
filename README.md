@@ -4,6 +4,9 @@ author: Jens Getreu
 date: 2017-08-09
 ---
 
+*This project is discontinued and superseeded by [Tp-Note - fast note-taking
+with templates and filename
+synchronization](https://blog.getreu.net/projects/tp-note/).
 
 Markup languages like _Markdown_, _ReStructuredText_, _textile_, _txt2tags_ or
 _mediawiki_ are perfectly suited for fast note taking. Type your notes with your
